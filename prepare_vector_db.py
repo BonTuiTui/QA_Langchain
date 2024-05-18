@@ -39,23 +39,6 @@ want Dudley mixing with a child like that.
     db.save_local(vector_db_path)
     return db
 
-# create_db_from_text()
-
-def create_db_from_files():
-    #Khai bao loader
-    loader = DirectoryLoader(data_path, glob='*.pdf', loader_cls = PyPDFLoader)
-    documents  = loader.load()
-
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size = 512, chunk_overlap = 50)
-    chunks = text_splitter.split_documents(documents)
-
-    embeddings = GPT4AllEmbeddings(model_file = "models/all-MiniLM-L6-v2-f16.gguf")
-
-    db = FAISS.from_documents(chunks,  embeddings)
-    db.save_local(vector_db_path)
-    return db
-
-
 create_db_from_text()
 
 
